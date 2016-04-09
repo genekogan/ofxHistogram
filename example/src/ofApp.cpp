@@ -26,18 +26,18 @@ void ofApp::update(){
     
 	if(cam.isFrameNew()) {
         
-        rgb.setFromPixels(cam.getPixelsRef());
+        rgb.setFromPixels(cam.getPixels());
         
         // get separate red, green, blue channels
-        r.setFromPixels(rgb.getPixelsRef().getChannel(0));
-        g.setFromPixels(rgb.getPixelsRef().getChannel(1));
-        b.setFromPixels(rgb.getPixelsRef().getChannel(2));
+        r.setFromPixels(rgb.getPixels().getChannel(0));
+        g.setFromPixels(rgb.getPixels().getChannel(1));
+        b.setFromPixels(rgb.getPixels().getChannel(2));
 
         // convert rgb to hsv and grab each channel individually
         cvCvtColor(rgb.getCvImage(), hsv.getCvImage(), CV_BGR2HSV);
-        h.setFromPixels(hsv.getPixelsRef().getChannel(0));
-        s.setFromPixels(hsv.getPixelsRef().getChannel(1));
-        v.setFromPixels(hsv.getPixelsRef().getChannel(2));
+        h.setFromPixels(hsv.getPixels().getChannel(0));
+        s.setFromPixels(hsv.getPixels().getChannel(1));
+        v.setFromPixels(hsv.getPixels().getChannel(2));
 
         // get histograms
         histogramR = histogram.getHistogram(r, 30); // 30 bins
