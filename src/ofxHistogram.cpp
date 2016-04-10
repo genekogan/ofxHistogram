@@ -28,7 +28,14 @@ vector<float> ofxHistogram::getHistogram(ofxCvGrayscaleImage & img, int numBins)
 
 vector<vector<vector<float> > > ofxHistogram::getHistogram3d(ofImage & img, int numBins) {
     ofxCvColorImage rgb;
-    rgb.setFromPixels(img.getPixels());
+    if (img.getPixels().getNumChannels() == 1) {
+        ofxCvGrayscaleImage gray;
+        gray.setFromPixels(img.getPixels());
+        rgb = gray;
+    }
+    else {
+        rgb.setFromPixels(img.getPixels());
+    }
     return getHistogram3d(rgb, numBins);
 }
 
