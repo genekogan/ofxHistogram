@@ -20,7 +20,7 @@ vector<float> ofxHistogram::getHistogram(ofxCvGrayscaleImage & img, int numBins)
     cvNormalizeHist( hist, 1.0 );
     
     for (int i=0; i<numBins; i++) {
-        histogram[i] = cvQueryHistValue_1D(hist, i);
+        histogram[i] = (float)cvGetReal1D(hist->bins, i);
     }
     cvReleaseHist( &hist );
     return histogram;
@@ -66,7 +66,7 @@ vector<vector<vector<float> > > ofxHistogram::getHistogram3d(ofxCvColorImage & i
     for (int ir=0; ir<numBins; ir++) {
         for (int ig=0; ig<numBins; ig++) {
             for (int ib=0; ib<numBins; ib++) {
-                histogram[ir][ig][ib] = cvQueryHistValue_3D(hist, ir, ig, ib);
+                histogram[ir][ig][ib] = cvGetReal3D(hist, ir, ig, ib);
             }
         }
     }    
